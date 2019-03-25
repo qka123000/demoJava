@@ -3,14 +3,25 @@ package com.qka.spring.spel;
 public class Car {
 	private String brand;
 	private double price;
-	private static String speed = "1111";
 
-	public static String getSpeed() {
-		return speed;
+	private double circle;
+	private String city;
+
+
+	public String getCity() {
+		return city;
 	}
 
-	public static void setSpeed(String speed) {
-		Car.speed = speed;
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public double getCircle() {
+		return circle;
+	}
+
+	public void setCircle(double circle) {
+		this.circle = circle;
 	}
 
 	public String getBrand() {
@@ -19,9 +30,7 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "Car [brand=" + brand + ", price=" + price + ", getBrand()=" + getBrand() + ", getPrice()=" + getPrice()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "Car [brand=" + brand + ", price=" + price + ", circle=" + circle + ", city=" + city + "]";
 	}
 
 	public void setBrand(String brand) {

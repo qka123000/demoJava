@@ -5,7 +5,24 @@ public class Person {
 	private int age;
 
 	private Car car;
-	private Address address;
+	private String city;
+	private String info;
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 	public Car getCar() {
 		return car;
@@ -13,14 +30,6 @@ public class Person {
 
 	public void setCar(Car car) {
 		this.car = car;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
 	}
 
 	public String getName() {
@@ -41,10 +50,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [name=" + name + ", age=" + age + ", car=" + car + ", address=" + address + ", getCar()="
-				+ getCar() + ", getAddress()=" + getAddress() + ", getName()=" + getName() + ", getAge()=" + getAge()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "Person [name=" + name + ", age=" + age + ", car=" + car + ", city=" + city + ", info=" + info + "]";
 	}
 
 }

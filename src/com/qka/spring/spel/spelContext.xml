@@ -7,16 +7,23 @@
 	<bean id="person" class="com.qka.spring.spel.Person">
 		<property name="name" value="#{'spring'}"></property>
 	</bean>
+	<bean id="address" class="com.qka.spring.spel.Address">
+		<property name="city" value="haerbin"></property>
+		<property name="street" value="red flag"></property>
+	</bean>
 
-	<!-- 使用spel引用类的静态属性 -->
 	<bean id="car" class="com.qka.spring.spel.Car">
-		<property name="speed" value="#{'max speed'}"></property>
+		<!-- 使用spel引用类的静态属性 语法: "#{T(类型).静态属性}" -->
+		<!-- 使用spel中使用运算符 -->
+		<property name="circle" value="#{T(java.lang.Math).PI*200}"></property>
+		<property name="price" value="400000"></property>
 	</bean>
 	<bean id="person1" class="com.qka.spring.spel.Person">
 		<property name="name" value="#{'spring1'}"></property>
-		<property name="car" value="#{car}"></property>
+		<!-- 使用spel引用其它的bean -->
+		<property name="city" value="#{address.city}"></property>
+		<!-- 使用表达式 -->
+		<property name="info" value="#{car.price>300000?'金领':'白领'}"></property>
 	</bean>
-	<!-- 使用spel引用其它的bean -->
 
-	<!-- 使用spel中使用运算符 -->
 </beans>
