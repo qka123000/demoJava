@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 使用spel为属性赋字面值 #{'字面值'} -->
+	<bean id="person" class="com.qka.spring.spel.Person">
+		<property name="name" value="#{'spring'}"></property>
+	</bean>
+
+	<!-- 使用spel引用类的静态属性 -->
+	<bean id="car" class="com.qka.spring.spel.Car">
+		<property name="speed" value="#{'max speed'}"></property>
+	</bean>
+	<bean id="person1" class="com.qka.spring.spel.Person">
+		<property name="name" value="#{'spring1'}"></property>
+		<property name="car" value="#{car}"></property>
+	</bean>
+	<!-- 使用spel引用其它的bean -->
+
+	<!-- 使用spel中使用运算符 -->
+</beans>
