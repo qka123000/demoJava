@@ -1,0 +1,104 @@
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+<body>
+	<div id="div">
+		<!-- 	姓 文本框 v-model = 姓 -->
+		姓
+		<input type="text" id="firstName" v-model="firstName">
+		<br />
+
+
+		<!-- 名 文本框 v-model = 名 -->
+		名
+		<input type="text" id="lastName" v-model="lastName">
+		<br />
+		<!-- 姓名1 v-model =姓名 -->
+		姓名1
+		<input type="text" id="fullName1" v-model="fullName1">
+		<br />
+
+		<!-- 姓名2 -->
+		姓名2
+		<input type="text" id="fullName2" v-model="fullName2">
+		<br />
+
+		<!-- 姓名3 -->
+		姓名3
+		<input type="text" id="fullName3" v-model="fullName3">
+		<br />
+
+		<!-- 此处相当于三遍fullName1函数,理论上执行三遍,但是其实只执行了一遍, -->
+		<!-- VUE会把函数缓存为对象,对象的属性名就是函数名-->
+		<!-- 如果对象不为空直接取结果,为空则执行,所以只执行一遍-->
+		<p>{{fullName1}}</p>
+		<p>{{fullName1}}</p>
+		<p>{{fullName1}}</p>
+
+	</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+	/* 初始化vue实例 */
+	const vm = new Vue({
+
+		/* el: 全局最外层对象,但不能用于body和html标签*/
+		el:"#div",
+	
+		/* data: */
+		data : {
+			firstName : "zhang",
+			lastName : "3f",
+			fullName2 : "zhang 3f"
+		},
+	
+		/* computed: 对象中的属性初始化显示,同时动态执行相关的方法; */
+		computed : {
+			/*    编写方法,返回姓名的拼装,方法名和v-model相对应 */
+			fullName1 (){
+				return this.firstName + " " + this.lastName;
+			}
+			,
+			
+			fullName3 : {
+				//计算并返回当前属性值
+				get (){
+					return this.firstName + " " + this.lastName;
+				}	,
+				
+				//监视当前属性值的变化, 当当前属性值变化后调用set做后续逻辑
+				set (value){
+					let firstName = value.split(" ")[0];
+					let lastName = value.split(" ")[1];
+					this.firstName = firstName;
+					this.lastName = lastName;
+				}
+			}
+		}		
+		
+		/* 配置监视 */
+		,watch : {
+		/* 监视firstName发生变化,调用回调函数,
+		回调函数参数默认会提供两个值
+		第一个是新属性值, 第二个是原属性值 */
+			firstName : function ( newVal  , oldVal ){
+				console.log(newVal , oldVal)
+			/* 拼装全名字符串,并赋值给fullname2 */
+				this.fullName2 =   newVal + " " + this.lastName;
+			}
+		}
+	});
+	/*
+	利用vue实例方法进行监视
+
+	vm.$watch( '监视对象' , 响应函数 ( 监视对象当前的值 ){
+		方法体
+	} )*/
+	vm.$watch( 'lastName' , function (val){
+		this.fullName2 =   this.firstName + " " + val;
+	} );
+
+</script>
+
+</html>

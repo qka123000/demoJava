@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+<body>
+	<div id="div">
+		<h1>mustache语法</h1>
+		<!-- 显示文本 -->
+		<p>{{returnMsg}}</p>
+		<!-- 可以写js表达式 -->
+		<p>{{returnMsg.toUpperCase()}}</p>
+		<p>{{returnMsg == "success"?"操作成功":"操作失败"}}</p>
+		<!-- 用v-text指令显示文本内容,同正常{{}}语法没有区别 -->
+		<p v-text="baidu"></p>
+		<!-- 显示html代码,相当于 innerHtml或者jquery的html()函数 -->
+		<p v-html="baidu"></p>
+		<img src={{imgUrl}}>
+		<h1>数据绑定</h1>
+		<!-- mustache语法不能作用于html属性,所以此配置失效 -->
+		<img src={{imgUrl}}>
+		<br />
+		<!-- 使用v-bind指令,对data里的属性进行数据绑定 -->
+		<img v-bind:src="imgUrl">
+		<br />
+		<!-- 使用v-bind指令可以省略 -->
+		<img :src="imgUrl">
+		<h1>事件监听</h1>
+		<!-- 用v-on:click="回调函数名" -->
+		<button v-on:click="btnClick">111</button>
+		<!-- 也可以用@页面事件="回调函数名"简化调用代码  -->
+		<button @click="btnSimpleClick">简化调用</button>
+		<!--  v-on:click="回调函数名(参数列表)"-->
+		<button @click="btnArgsClick('aaa' , 111)">传递参数调用</button>
+		<!-- 参数传递vue实例动态msg属性; -->
+		<button @click="btnDyArgsClick (returnMsg)">传递VUE调用</button>
+	</div>
+</body>
+<script type="text/javascript" src="/demoJava/vue/js/vue.js"></script>
+<script type="text/javascript">
+	const vm = new Vue({
+		el : "#div",
+		data : {
+			imgUrl : "https://cn.vuejs.org/images/logo.png",
+			returnMsg : "success",
+			baidu : "<a href = 'http://www.baidu.com' >www.baidu.com</a>"
+		},
+		//methods属性指定方法;
+		methods :{
+			btnClick(){
+				alert("1111")
+			},
+			
+			btnSimpleClick(){
+				alert("simple click message")
+			},
+			btnArgsClick(arg1, arg2){
+				alert("btn args click arg1=["+arg1+"] , arg2=["+arg2+"]")
+			},
+			btnDyArgsClick(message){
+				alert("btn dyargs click returnMessage=["+message+"]")
+			}
+			
+		}
+	});
+</script>
+
+</html>
