@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>class and style</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+	<div id="vueDiv">
+		<h1>遍历数组</h1>
+
+		<ul>
+			<!-- v-for = "( 循环临时变量  下标名 ) in 数组名"  :key = "下标名" -->
+			<li v-for="( c,index ) in coupons" :key="index">
+				{{index}} : {{c.couponMoney}}--{{c.couponDate}}
+				<button @click="delCoupon(index)">删除</button>
+				<button @click='modifyCoupon(index , {"couponMoney":"88.00" , "couponDate" : "9999999"})'>更新</button>
+			</li>
+		</ul>
+
+		<h1>遍历对象</h1>
+		<ul>
+			<!-- v-for="( 键值临时变量 , 键名临时变量 ) in 对象" :key = "键名临时变量" -->
+			<li v-for="( v,k ) in coupons[1]" :key = "k">{{k}}--{{v}}</li>
+		</ul>
+
+	</div>
+
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+new Vue({
+	el:"#vueDiv",
+	data:{
+		coupons : [
+			{"couponMoney":"2.00" , "couponDate" : "20190401"},
+			{"couponMoney":"3.00" , "couponDate" : "20190501"},
+			{"couponMoney":"99.00" , "couponDate" : "20190601"},
+			{"couponMoney":"21.00" , "couponDate" : "20190701"},
+		]
+	},
+	methods:{
+		delCoupon(index){
+			this.coupons.splice(index , 1);
+		},
+		
+		modifyCoupon ( index , coupon ){
+			/*
+			能够对数组进行增删改
+			数组名.splice(下标,删除元素数量,[添加的元素]);
+				其中,操作数量,是几就从下标开始删除几个,为0表示不删除,
+				添加元素可以没有,表示只删除
+				删除数量为1 , 添加元素存在 ,表示更改当前元素
+				删除数量为0,添加元素,表示在当前元素后追加元素;
+			*/
+			this.coupons.splice( index , 1 , coupon )
+		}
+	}
+});
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>class and style</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <div id="vueDiv">
+        <input type="button" value="destroy vue" @click="killVue">
+        <p v-show="isShow">为加油</p>
+
+    </div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#vueDiv"
+        , data: {
+            isShow: true
+
+        }
+        , mounted() {
+            // vue初始化后立即执行
+            test();
+            this.intervalId = setInterval(() => {
+                this.isShow = !this.isShow
+            }, 1000);
+        }
+        , beforeDestroy() {
+            clearInterval(this.intervalId);
+        }
+        , methods: {
+            killVue() {
+                this.$destroy();
+            }
+        }
+    });
+    // 可以定义外部函数以供vue调用
+    function test() {
+        alert(111)
+    }
+</script>
+
+</html>

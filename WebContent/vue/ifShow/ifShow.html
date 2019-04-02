@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>class and style</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+	<div id="vueDiv">
+		<h1>条件渲染</h1>
+
+		<p v-if="ok">操作成功</p>
+		<p v-else="!ok">操作失败</p>
+		
+		<p v-show = "!ok">支付结果xxx</p>
+
+		<button @click="ok=!ok">切换</button>
+
+	</div>
+
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+	const VM = new Vue({
+		el : "#vueDiv",
+		data : {
+			ok : false
+		}
+
+	})
+</script>
+</html>

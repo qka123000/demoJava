@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>class and style</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <div id="vueDiv">
+        <h1>绑定监听</h1>
+
+        <button @click="test1()">test1</button>
+        <!-- 传递事件变量用 : $event -->
+        <button @click="test2(123 , $event)">test2</button>
+        <h1>事件修饰符</h1>
+        <div style="width:200px ; height :200px;background-color :#cdcdcd" @click="test3()">
+            <!-- js事件冒泡原理,正常触发test4会把父元素test3事件也触发,
+                可以用@click.stop阻止触发父元素时间, 只触发子元素事件 -->
+            <div style="width:100px ; height :100px ;background-color:#dcdcdc" @click.stop="test4()"></div>
+        </div>
+        <!-- 正常点击a标签先触发绑定事件然后触发链接 -->
+        <!-- 用 @click.prevent 阻止触发链接,只触发事件 -->
+        <a href="http://www.baidu.com" @click.prevent="test5()">baidu</a>
+        <h1>按键修饰符</h1>
+        <!-- 用@keyup可以监听按键行为 -->
+        <!-- 用@keyup[.keyCode|按键名称]可以监听指定按键行为 -->
+        <!-- 以下两个input按回车都会触发test6事件 -->
+        <!-- 按键名称方式只有一些特殊的键才能用 -->
+        <input type="text" name="" id="" @keyup.13="test6()">
+        <input type="text" name="" id="" @keyup.enter="test6()">
+    </div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: "#vueDiv",
+        data: {
+
+        },
+        methods: {
+            /*无参方法默认传event*/
+            test1() {
+                alert(event.target.innerHTML);
+            }
+            ,
+            // 有参数构造方法需要显示的传event
+            test2(val, event) {
+                alert(val + "  " + event.target.innerHTML);
+            },
+            test3() {
+                alert("test3");
+
+            },
+            test4() {
+                alert("test4");
+            },
+            test5() {
+                alert("test5")
+            },
+            test6(){
+                alert("test6")
+            }
+
+        }
+    });
+</script>
+
+</html>

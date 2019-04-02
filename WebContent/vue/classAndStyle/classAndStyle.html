@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>class and style</title>
+<style type="text/css">
+.aClass {
+	color: red
+}
+
+.sClass {
+	color: #cdcdcd
+}
+
+.bClass {
+	color: blue
+}
+
+.cClass {
+	font-size: 50px;
+}
+</style>
+</head>
+<body>
+	<div id="vueDiv">
+		<h2>class绑定</h2>
+		<!--字符串绑定 p标签 :class = "vue.data.对应的变量名"-->
+		<p :class="strStyle">字符串绑定</p>
+		<button @click="strUpdate">字符串绑定方式更新样式</button>
+		<!-- 对象p标签  p标签 :class = "{样式class:vue.data.变量名1,值为true或者false , vue.data.变量名1,值为true或者false  ... }"
+		如果同时为true,那么类名2的样式生效
+		-->
+		<p :class="{aClass : aflag,cClass:cFlag}">对象p标签</p>
+		<button @click="objUpdate">对象方式更新样式</button>
+		<!-- 数组p标签  p标签 :class = "[元素1,元素2 , ...]" 
+			数组中的元素为  '样式class名'
+			用得比较少
+		-->
+
+		<p :class="['aClass', 'cClass']">数组p标签</p>
+		<button>数组样式</button>
+		<!-- style绑定:语法 :style = "{属性1: vue.data里的变量, 属性2:vue.data里的变量}" -->
+		<h2>style绑定</h2>
+		<p :style="{color : activeColor}">style绑定测试</p>
+	</div>
+
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+	const VM = new Vue(
+	{
+		el:"#vueDiv" ,
+			data:{
+				strStyle:"sClass",
+				strStyleA:"aClass",
+				strStyleC:"cClass",
+				activeColor:"green",
+				aFlag:true,
+				cFlag:true
+			},
+			methods:{
+				
+				strUpdate (){
+					this.strStyle = "bClass"
+				},
+				objUpdate(){
+					this.aFlag = !this.aFlag;
+					this.cFlag = !this.cFlag;
+
+				}
+			}
+
+	});
+</script>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>class and style</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <div id="vueDiv">
+        <input type="text" v-model="searchName">
+        <ul>
+            <!-- 遍历计算属性的数组 -->
+            <li v-for="( oil  , i ) in filterOil" key="oil">{{oil.oilCode}}-->{{oil.oilName}}</li>
+        </ul>
+        <button @click="sortOil(0)">原来顺序</button>
+        <button @click="sortOil(1)">排序小到大</button>
+        <button @click="sortOil(2)">排序大到小</button>
+
+    </div>
+
+
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: "#vueDiv",
+        data: {
+            oilInfo: [
+                { oilCode: "92", oilName: "92#汽油" },
+                { oilCode: "98", oilName: "98#汽油" },
+                { oilCode: "35", oilName: "35#柴油" },
+                { oilCode: "932", oilName: "92#汽油外岛" },
+                { oilCode: "CNG", oilName: "天然气" }
+            ],
+            searchName: "",//searchName变化相关元素也变化;
+            sortType: "0"
+        },
+        methods: {
+            sortOil(sortType) {
+                this.sortType = sortType;
+            }
+
+        },
+
+        computed: {
+            filterOil() {
+                //es6的简写形式
+                //正常为 const searchName = this.searchName;
+                //const oilInfo = this.oilInfo;
+
+                let oilList = {};
+
+                let { searchName, oilInfo, sortType } = this;
+                console.log(sortType)
+                if (sortType == "1") {
+                    oilList = oilInfo.sort((a, b) => (a.oilCode - b.oilCode));
+                }
+                if (sortType == "2") {
+                    console.log("62>>" + sortType)
+                    oilList = oilInfo.sort((a, b) => (b.oilCode - a.oilCode));
+                }
+
+                // oilList = oilInfo.filter(function (o) {
+                //     if (o.oilCode.indexOf(searchName) >= 0) {
+                //         return o;
+                //     }
+                // });
+                /*
+                filter函数:
+                    数组:filter(function (当前元素){函数体; return true/false;})
+                    数组每个元素都会做filter函数;
+                    走filter函数的元素,如果内部函数返回真的元素会形成一个新的数组返回;
+                */
+                /*es6箭头函数写法*/
+                oilList = oilInfo.filter(o => (o.oilCode.indexOf(searchName) >= 0));
+                return oilList;
+            }
+        }
+    });
+
+</script>
+
+</html>

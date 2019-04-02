@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>class and style</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <div id="vueDiv">
+        <form action="/xxxController/yyy" @submit.prevent="testSubmit()">
+            加油站名称: <input type="text" name="" id="" v-model="stationName"><br />
+            <input type="radio" name="" id="" value="public" v-model="payAccount">公户
+            <input type="radio" name="" id="" value="private" v-model="payAccount">私户<br />
+            <input type="checkbox" name="" id="" value="special" v-model="userType">专车
+            <input type="checkbox" name="" id="" value="member" v-model="userType">>会员
+            <input type="checkbox" name="" id="" value="blackCard" v-model="userType">>黑卡
+            <input type="checkbox" name="" id="" value="wxUser" v-model="userType">>普通用户<br />
+            优惠活动
+            <select v-model="discountSelect">
+                <!-- 用 :value 绑定vue中动态的值 -->
+                <option :value="discount.discountId" v-for="(discount , index) in discountList" :key="index">
+                    {{discount.discountName}}</option>
+            </select><br />
+            描述: <textarea v-model="describe"></textarea><br />
+
+            <input type="submit" value="提交">
+        </form>
+
+    </div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: "#vueDiv",
+        data: {
+            stationName: "西湖大路加油站"
+            , payAccount: "public"
+            //data里绑定,选中哪个数组中就写哪个的value
+            , userType: ["special", "blackCard"]
+            , discountList: [{ "discountId": "1", "discountName": "双11活动" }, { "discountId": "1212", "discountName": "双12活动" }, { "discountId": "18", "discountName": "双十八活动" },]
+            //通过指定value,选中option
+            , discountSelect: "1212"
+            , describe: ""
+        }
+        ,
+        methods: {
+            testSubmit() {
+                console.log(this.payAccount, this.userType, this.discountList, this.discountSelect, this.describe);
+            }
+        }
+    });
+</script>
+
+</html>
