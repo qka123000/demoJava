@@ -31,6 +31,7 @@
             }, 1000);
         }
         , beforeDestroy() {
+            console.log("beforeDestroy() ")
             clearInterval(this.intervalId);
         }
         , methods: {
