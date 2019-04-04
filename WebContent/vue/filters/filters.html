@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>class and style</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+
+    <div id="vueDiv">
+        <!-- 用管道符把变量传给过滤器 -->
+        <p>{{nowTime|formatDate}}</p>
+        <!-- 过滤器函数中,第一个参数为管道符左边的变量,第二个参数以后,是显式调用过滤器传的值 -->
+        <p>{{nowTime|formatDate("YYYYMMDD")}}</p>
+    </div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/moment.js"></script>
+<script type="text/javascript">
+
+    // 外部定义过滤器
+    // 传统写法
+    // Vue.filter("formatDate", function (nowTime, formatStr) {
+    //     return moment(nowTime).format(formatStr || "YYYYMMDD HHmmss");
+    // });
+    //es6 箭头函数写法
+    // Vue.filter("formatDate", (nowTime, formatStr) => (
+    //     moment(nowTime).format(formatStr || "YYYYMMDD HHmmss")
+    // ));
+    // es6 箭头函数写法加形参赋值法似乎更牛逼些
+    Vue.filter("formatDate", (nowTime, formatStr = "YYYYMMDD HHmmss") => (
+        moment(nowTime).format(formatStr)
+    ));
+
+
+    new Vue({
+        el: "#vueDiv",
+        data: {
+            // 可以是date类型,也可以是字符串注意字符串的格式
+            nowTime: '2018-03-31'
+        }
+    });
+
+
+</script>
+
+</html>

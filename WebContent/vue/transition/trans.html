@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>class and style</title>
+    <style type="text/css">
+        /* 定义显示时的样式 */
+        .station-enter-active,
+        .station-leave-active {
+            transition: opacity 1s;
+        }
+
+        /* 定义不显示时的样式 */
+        .station-enter,
+        .station-leave-to {
+            opacity: 0;
+        }
+
+        .showMessage-enter-active {
+            /* transition: all 所有指定的css属性都会有过度效果*/
+            transition: all 1s;
+        }
+
+        .showMessage-leave-active {
+            transition: all 5s;
+        }
+        /* 消失的时候增加样式 transform:translate(20x) */
+        .showMessage-enter,
+        .showMessage-leave-to {
+            /* translate(x,y):当前元素向x轴和y轴平移的像素 */
+            transform: translate(20px, 0);
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="vueDiv">
+        <button @click="isShow=!isShow">切换</button>
+        <!-- transition标签的name属性和css中enter-active,leave-active的前缀一致 -->
+        <transition name="station">
+            <p v-show="isShow">操作成功</p>
+        </transition>
+
+        <button @click="isShow2=!isShow2">切换</button>
+        <transition name="showMessage">
+            <p v-show="isShow2">success</p>
+        </transition>
+    </div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: "#vueDiv",
+        data: {
+            isShow: true
+            , isShow2: true
+        }
+
+    });
+</script>
+
+</html>

@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <style>
+        [v-if] {
+            display: none;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        [v-tianyuanhuayun] {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="vue">
+        <p ref="test">操作成功</p>
+        <button @click="doCfm">confirm</button>
+        <p v-if>{{msg}} 111</p>
+        <p v-cloak>{{msg}} 222</p>
+        <p v-tianyuanhuayun>{{msg}} 333</p>
+        <p>{{msg}} 444</p>
+    </div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    alert(1)
+
+    Vue.directive("tianyuanhuayun", (el, binding) => {});
+    alert(2)
+    new Vue({
+        el: "#vue",
+        data: {
+            "msg": "success"
+        }
+
+        , methods: {
+            doCfm() {
+                alert(this.refs.test.textContent);
+            }
+        }
+    });
+</script>
+
+</html>
